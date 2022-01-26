@@ -1,0 +1,24 @@
+<swiper [config]="swiperConfig">
+  <ng-template swiperSlide *ngFor="let movie of movies">
+    <!-- Bootstrap Card -->
+    <a [routerLink]="['/movies', movie.id]">
+      <div class="card bg-dark text-white">
+        <img src="{{movie.imagePath}}" class="card-img img-fluid" alt="{{ movie.title }}" style="height:600px;">
+        <div class="card-img-overlay d-flex align-items-start flex-column pb-4 ps-2 ps-sm-4"
+          style="background-color: rgba(56, 58, 89, 0.7)">
+          <h1 class="card-title mt-auto fw-normal">{{ movie.title }}</h1>
+          <p class="card-text fs-5 fw-light">
+            <svg width="30" height="30" viewBox="0 0 35 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M16.0001 23.0267L24.2401 28.0001L22.0534 18.6267L29.3334 12.3201L19.7467 11.5067L16.0001 2.66675L12.2534 11.5067L2.66675 12.3201L9.94675 18.6267L7.76008 28.0001L16.0001 23.0267Z"
+                fill="#FFD912" />
+            </svg>
+  
+            {{ movie.rating }} / 10
+          </p>
+        </div>
+        </div>  
+    </a>
+    
+  </ng-template>
+</swiper>

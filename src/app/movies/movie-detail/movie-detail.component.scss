@@ -1,0 +1,15 @@
+.detail-border{
+    position: relative;
+    &::after{
+        content: "";
+        display: block;
+        position:absolute;
+        width: 1px;
+        height: 70%;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: white;
+        opacity: 0.6;
+    }
+}

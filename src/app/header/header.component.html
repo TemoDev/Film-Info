@@ -1,0 +1,35 @@
+<div class="row mb-2">
+  <div class="col-sm-8">
+    <nav class="navbar navbar-expand navbar-light">
+      <!-- Logo -->
+      <a href="#" class="navbar-brand text-light fs-2 fw-bolder">Film<span class="text-primary">Info</span></a>
+
+      <!-- Navbar Links -->
+      <div class="collapse navbar-collapse d-flex justify-content-sm-center justify-content-end"
+        id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-link text-light" aria-current="page" routerLink="/home" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">Home</a>
+          <a class="nav-link text-light" routerLink="/movies" routerLinkActive="active">Movies</a>
+          <a class="nav-link text-light" routerLink="/watch-list" routerLinkActive="active">Watch List</a>
+        </div>
+
+      </div>
+    </nav>
+  </div>
+  <div class="col-sm-4 d-flex align-items-center">
+    <!-- Search Form -->
+    <form class="d-flex flex-fill">
+      <div class="input-group">
+        <input type="text" class="form-control border-0  bg-dark" placeholder="Search" aria-label="Username"
+          aria-describedby="basic-addon1">
+        <span class="input-group-text border-0 bg-dark" id="basic-addon1">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-search"
+            viewBox="0 0 16 16">
+            <path
+              d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+          </svg>
+        </span>
+      </div>
+    </form>
+  </div>
+</div>

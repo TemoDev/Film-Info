@@ -1,0 +1,28 @@
+.nav-link{
+    opacity: 0.6;
+    transition: all 0.3s ease-in-out;
+    
+    &:hover{
+        opacity: 1;
+    }
+}
+
+.active{
+    opacity: 1;
+    position: relative;
+    transition: all 0.3s ease-in-out;
+    
+    &::after{
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        width: 50%;
+        height: 2px;
+        background-color: #0077C0;
+        transform: translateX(-50%);
+        border-radius: 20px;
+
+        transition: all 0.3s ease-in-out;
+    }
+}

@@ -1,1 +1,50 @@
 /* You can add global styles to this file, and also import other style files */
+
+// Swiper style imports
+@import '~swiper/scss';
+@import '~swiper/scss/pagination';
+
+// Font
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700&display=swap');
+
+$font-family-sans-serif: 'Montserrat';
+
+// Colors
+$primary: #0077C0;
+$secondary: #C7EEFF;
+$body-bg: #1D242B;
+$body-color: #FAFAFA;
+$text-light: #FAFAFA;
+$dark: #181E24;
+$font-weight-bolder: 500;
+$border-radius: 20px;
+$spacer: 2rem;
+
+
+@import "../node_modules/bootstrap/scss/bootstrap.scss";
+
+// Custom Swiper pagination bullets
+.swiper-pagination-bullet {
+    width: 10px;
+    height: 10px;
+    text-align: center;
+    font-size: 10px;
+    color: transparent;
+    opacity: 0.8;
+    background: transparent;
+    border: 1px solid $body-color;
+
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .swiper-pagination-bullet-active {
+    color: #fff;
+    background: $primary;
+    border: 1px solid $primary;
+  }
+
+  .swiper-slide{
+      height: 30%;
+      padding-left: 5px;
+      padding-right: 5px;
+  }
