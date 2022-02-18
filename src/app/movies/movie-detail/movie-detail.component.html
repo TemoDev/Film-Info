@@ -28,17 +28,7 @@
         <p class="fw-light opacity-75">{{movie.description}}</p>
 
         <!-- Add to watch list button -->
-        <button class="btn btn-primary mt-1" (click)="pushData(movie.id)">Add to Watchlist</button>
+        <button class="btn btn-primary mt-1" (click)="pushData()">Add to Watchlist</button>
 
-    </div>
-</div>
-
-<!-- Cast -->
-<div class="row mt-3 d-flex justify-content-start">
-
-    <h2 class="fw-medium mb-2">Cast</h2>
-    <div class="col d-block" *ngFor="let cast of cast">
-        <img src="{{cast.imagePath}}" alt="{{cast.name}}" style="width:8rem">
-        <p class="mt-2">{{cast.name}}</p>
     </div>
 </div>

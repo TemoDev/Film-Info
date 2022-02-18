@@ -15,8 +15,12 @@ export class WatchListComponent implements OnInit {
   constructor(public movieService: MovieService) { }
 
   ngOnInit(): void {
-    // this.movies.concat(this.movieService.returnWatchListArr());
-    // console.log(this.movies);
+    this.movies = this.movieService.watchListMovie;
+    console.log(this.movies);
+  }
+
+  removeMovie(value) {
+    this.movies.splice(value, 1)
   }
 
 }

@@ -11,6 +11,8 @@ import { MovieCast } from '../../shared/cast.model';
 })
 export class MovieDetailComponent implements OnInit {
 
+  movies: Movie[];
+
   movie: Movie;
   movieId: number;
   cast: MovieCast[];
@@ -23,13 +25,16 @@ export class MovieDetailComponent implements OnInit {
       return this.movieId = params['id'];
     })
 
+    this.movies = this.movieService.getMovies();
     // assign movie id to function that fetches selected movie from movie.service.ts
-    this.movie = this. movieService.selectedMovie(this.movieId);
-    this.cast = this.movie.cast;
+
+    this.movie = this.movies.filter(movie=> movie.id == this.movieId)[0];
+    console.log(this.movie.cast)
   }
 
-  pushData(id: number) {
-    this.movieService.addSelectedMovie(id);
+  pushData() {
+    const fetchedMovie: Movie = this.movie;
+    this.movieService.watchListMovie.push(fetchedMovie);
   }
 
 }
