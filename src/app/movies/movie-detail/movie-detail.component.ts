@@ -26,10 +26,11 @@ export class MovieDetailComponent implements OnInit {
     })
 
     this.movies = this.movieService.getMovies();
-    // assign movie id to function that fetches selected movie from movie.service.ts
 
+    // Filter Movie by its ID
     this.movie = this.movies.filter(movie=> movie.id == this.movieId)[0];
-    console.log(this.movie.cast)
+    this.cast = this.movie.cast;
+    console.log(this.cast);
   }
 
   pushData() {

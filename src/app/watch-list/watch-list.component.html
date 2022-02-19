@@ -14,7 +14,7 @@
               {{ movie.rating }} / 10
             </p>
           <p>{{movie.airDate}} ‧ {{movie.genre}} ‧ 120min</p>
-          <div class="row d-flex">
+          <div class="card-body d-flex justify-content-around p-0">
             <button class="btn btn-danger" (click)="removeMovie(movies.indexOf(movie))">Remove</button>
             <a [routerLink]="['/movies', movie.id]" class="btn btn-primary mt-auto w-50 align-self-end">More</a>
           </div>
@@ -23,3 +23,4 @@
     </div>
   </div>
   
+<p *ngIf="movies.length <= 0" style="text-align: center">Your Watchlist is empty</p>  
