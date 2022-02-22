@@ -1,45 +1,132 @@
-import {
-  Injectable
-} from '@angular/core';
-
-import { Subject } from 'rxjs';
-
-import {
-  Movie
-} from './movie.model';
-import {
-  MovieCast
-} from './cast.model';
+import {  Injectable } from '@angular/core';
+import {  Movie} from './movie.model';
+import { MovieCast } from './cast.model';
+import { HttpClient } from '@angular/common/http';
+import {map} from 'rxjs/operators';
 
 @Injectable({providedIn: 'root'})
 export class MovieService {
 
+  constructor(private http: HttpClient){}
   watchListMovie: Movie[] = [];
 
-  private movies: Movie[] = [
-    new Movie(1010, 'Spider-Man: No Way Home', `With Spider-Man's identity now revealed, our friendly neighborhood web-slinger is unmasked and no longer able to separate his normal life as Peter Parker from the high stakes of being a superhero. When Peter asks for help from Doctor Strange, the stakes become even more dangerous, forcing him to discover what it truly means to be Spider-Man.`, 'Action, Thriller', 8.8, 'December 17, 2021', 'English', 20.5, 'https://www.cnet.com/a/img/Tpb3FtkoNsKgyVG6KEKNaVq6JT0=/940x0/2021/11/29/82fb5acc-9155-4844-be9c-e0831a6b837c/nowayhome.jpg',
-      [
-        new MovieCast('Tom Holland', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBKRizGW6Md-BUD5MchQ_UWgYZVKwNQxoPzQte9r0fwSQzBV6h'),
-        new MovieCast('Tobey Maguire', 'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcR8aL--nXG15st6MG-nAXulnYh0tAOg4qgNfhYhF8UOFxpMoLNX'),
-      ]),
-    new Movie(2020, 'Red Notice', `In the world of international crime, an Interpol agent attempts to hunt down and capture the world's most wanted art thief.`, 'Action, Thriller, Drama', 6.4, 'September 14, 2021', 'English', 14.6, 'https://occ-0-2794-2219.1.nflxso.net/dnm/api/v6/E8vDc_W8CLv7-yMQu8KMEC7Rrr8/AAAABbR-nSp2Yb60VN2KH-T2Q0waTmBY8xNlVrdaMj-ogKxkqtDI--frpa7Sn_LRnaT0EmYb-KIAh3--aj9ngy2MhAENI-Ul.jpg?r=afe',
-      [
-        new MovieCast('Gal Gadot', 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSHfVk6KNx4Ocy5sVJwo0PqVz_g01OM9k2_MNfzTVK07yABwLBi'),
-        new MovieCast('Dwayne Johnson', 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTYYTLgX6ZLrYwz-3c7iB3gVs87jIKnbbg3Ba-Gt8ykJF2uZgu4'),
-      ])
-  ];
-
-  // Here we return the copy of the array written above. I use it in carousel.component.ts to 
-  getMovies() {
-    return this.movies.slice();
+  getTMDBMovies() {
+    return this.http.get('https://api.themoviedb.org/3/movie/popular?api_key=0e40baa3cc7b3ab4defbfaa75a5bd98d&language=en-US&page=1').pipe(
+      map( (responseData) => {
+      const responseMovie = responseData['results'];
+      console.log(responseMovie)
+      const movies: Movie[] = [];
+      for(const movie of responseMovie){
+        movies.push(
+          new Movie(
+            movie.id, 
+            movie.original_title, 
+            movie.overview, 
+            movie.genre_ids,
+            movie.vote_average, 
+            movie.release_date, 
+            movie.original_language, 
+            movie.vote_count, 
+            `https://image.tmdb.org/t/p/original` + movie.backdrop_path))
+      }
+      return movies;
+    } ));
   }
 
-  selectedMovie(id: number) {
-    const selectedId = id
-    const result = this.movies.find( ({id})=> {
-      id == selectedId;
+  getGenres() {
+    return this.http.get(` https://api.themoviedb.org/3/genre/movie/list?api_key=0e40baa3cc7b3ab4defbfaa75a5bd98d&language=en-US`).subscribe(value => {
+      console.log(value['genres']);
     })
-    return result;
+  }
+
+  getGenre(genreId){
+    let genreName;
+    switch (genreId){
+      case 28: 
+        genreName = "Action";
+        break;
+      case 12: 
+        genreName = "Adventure";
+        break;
+      case 16: 
+        genreName = "Animation";
+        break;
+      case 35: 
+        genreName = "Comedy";
+        break;
+      case 80: 
+        genreName = "Crime";
+        break;
+      case 99:  
+        genreName = "Documentary";
+        break;
+      case 18: 
+        genreName = "Drama";
+        break;
+      case 10751:
+        genreName = "Family";
+        break;
+      case 14: 
+        genreName = "Fantasy";
+        break;
+      case 36: 
+        genreName = "History";
+        break;
+      case 27:  
+        genreName = "Horror";
+        break;
+      case 10402:
+        genreName = "Music";
+        break;
+      case 9648: 
+        genreName = "Mystery";
+        break;
+      case 10749: 
+        genreName = "Romance";
+        break;
+      case 878:
+        genreName = "Science Fiction";
+        break;
+      case 10770:
+        genreName = "TV Movies";
+        break;
+      case 53:
+        genreName = "Thriller";
+        break;
+      case 10752: 
+        genreName = "War";
+        break;
+      case 37: 
+        genreName = "Wester";
+        break;    
+    }
+    return genreName;
+  }
+
+  createAndStoreMovies(movie: Movie){
+    this.http.post<{name: string}>('https://film-info-78379-default-rtdb.firebaseio.com/movie.json', movie)
+    .subscribe(value => console.log(value))
+  }
+
+  fetchMovies() {
+    return this.http.get<{[key: string]: Movie}>('https://film-info-78379-default-rtdb.firebaseio.com/movie.json')
+    .pipe(
+      map( responseData => {
+        const movieArray: Movie[] = [];
+
+        for(const key in responseData) {
+          if(responseData.hasOwnProperty(key)) {
+            movieArray.push({...responseData[key], keyId:key});
+          }
+        }
+        return movieArray;
+      } )
+    );
+  }
+
+  deleteMovie(movieId: string){
+    return this.http.delete(`https://film-info-78379-default-rtdb.firebaseio.com/movie/${movieId}.json`);
   }
 
 }
+

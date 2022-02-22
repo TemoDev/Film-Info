@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Movie } from 'src/app/shared/movie.model';
 import { MovieService } from 'src/app/shared/movie.service';
 
@@ -9,13 +10,13 @@ import Swiper, {SwiperOptions, Pagination, Autoplay} from 'swiper';
   templateUrl: './carousel.component.html',
   styleUrls: ['./carousel.component.scss']
 })
-export class CarouselComponent implements OnInit {
+export class CarouselComponent implements OnInit, OnDestroy {
 
-  movies: Movie[];
+  subscription: Subscription;
+  movies: Movie[] = [];
 
   public swiperConfig: SwiperOptions = {
     pagination: { clickable: true },
-    loop: true,
     autoplay: {
       delay: 2000,
     },
@@ -26,7 +27,17 @@ export class CarouselComponent implements OnInit {
   ngOnInit(): void {
     Swiper.use([Pagination, Autoplay]);
 
-    this.movies = this.movieService.getMovies();
+    this.subscription = this.movieService.getTMDBMovies().subscribe((movieArr) => {
+      
+      // Get top 5 the most popular movies
+      for(let amount = 0; amount < 5; amount++ ){
+        this.movies.push(movieArr[amount]);
+      }
+    })
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
 }

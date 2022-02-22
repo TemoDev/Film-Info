@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Movie } from '../shared/movie.model';
 import { MovieService } from '../shared/movie.service';
@@ -11,16 +12,20 @@ import { MovieService } from '../shared/movie.service';
 export class WatchListComponent implements OnInit {
 
   movies: Movie[];
+  movieKeyId: string;
 
-  constructor(public movieService: MovieService) { }
+  constructor(private movieService: MovieService, private router: Router) { }
 
-  ngOnInit(): void {
-    this.movies = this.movieService.watchListMovie;
-    console.log(this.movies);
+  ngOnInit(): void {  
+    this.movieService.fetchMovies().subscribe(fetchedMovies => {
+      this.movies = fetchedMovies;
+      console.log(fetchedMovies);
+    })
   }
 
-  removeMovie(value) {
-    this.movies.splice(value, 1)
+  removeMovie(selectedMovie: Movie) {
+    this.movieService.deleteMovie(selectedMovie['keyId']).subscribe(()=> {
+      this.movies.splice(this.movies.indexOf(selectedMovie), 1);
+    });
   }
-
 }

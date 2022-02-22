@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MovieService } from '../shared/movie.service';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private movieService: MovieService) { }
 
   ngOnInit(): void {
+  
+    this.movieService.getTMDBMovies().subscribe(movie => {
+      console.log(movie);
+    })
+
+    this.movieService.getGenres();
+
   }
 
 }

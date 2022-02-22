@@ -1,8 +1,25 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
-import { MovieService } from '../../shared/movie.service';
-import { Movie } from '../../shared/movie.model';
-import { MovieCast } from '../../shared/cast.model';
+import {
+  Component,
+  OnInit
+} from '@angular/core';
+import {
+  Subscription
+} from 'rxjs';
+
+import {
+  ActivatedRoute,
+  Params
+} from '@angular/router';
+import {
+  MovieService
+} from '../../shared/movie.service';
+import {
+  Movie
+} from '../../shared/movie.model';
+import {
+  MovieCast
+} from '../../shared/cast.model';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-movie-detail',
@@ -11,31 +28,46 @@ import { MovieCast } from '../../shared/cast.model';
 })
 export class MovieDetailComponent implements OnInit {
 
-  movies: Movie[];
+  subscription: Subscription;
+  movies: Movie[] = [];
 
   movie: Movie;
   movieId: number;
   cast: MovieCast[];
 
-  constructor(private movieService: MovieService, private route: ActivatedRoute) { }
+  movieGenres: string[] = [];
 
-  ngOnInit(): void {
+
+  constructor(private movieService: MovieService, private route: ActivatedRoute, private http: HttpClient) {}
+
+  ngOnInit() {
     this.route.params
-    .subscribe((params: Params) => {
-      return this.movieId = params['id'];
+      .subscribe((params: Params) => {
+        return this.movieId = params['id'];
+      })
+
+    this.subscription = this.movieService.getTMDBMovies().subscribe((movieArr) => {
+      this.movies = movieArr;
+
+      // Filter Movie by its ID
+      this.movie = this.movies.filter(movie => movie.id == this.movieId)[0];
+      console.log(this.movie.genres);
+
+      this.movie.genres.forEach(value => {
+        this.movieGenres.push(this.movieService.getGenre(value));
+      })
+
     })
-
-    this.movies = this.movieService.getMovies();
-
-    // Filter Movie by its ID
-    this.movie = this.movies.filter(movie=> movie.id == this.movieId)[0];
-    this.cast = this.movie.cast;
-    console.log(this.cast);
   }
 
-  pushData() {
-    const fetchedMovie: Movie = this.movie;
-    this.movieService.watchListMovie.push(fetchedMovie);
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
+  onAddMovie(movie: Movie) {
+    // const fetchedMovie: Movie = this.movie;
+    // this.movieService.watchListMovie.push(fetchedMovie);
+    this.movieService.createAndStoreMovies(movie);
   }
 
 }

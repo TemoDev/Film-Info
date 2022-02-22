@@ -5,11 +5,12 @@ export class Movie {
         public id: number,
         public title: string, 
         public description: string, 
-        public genre: string, 
+        public genres: [],
         public rating: number, 
         public airDate: string, 
         public language: string, 
         public reviews: number, 
         public imagePath: string, 
-        public cast: MovieCast[]){}
+        public keyId ?: string,
+        public cast ?: MovieCast[]){}
 }
