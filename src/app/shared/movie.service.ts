@@ -128,5 +128,7 @@ export class MovieService {
     return this.http.delete(`https://film-info-78379-default-rtdb.firebaseio.com/movie/${movieId}.json`);
   }
 
+  console.log("auth");
+
 }
 
