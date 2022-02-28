@@ -1,4 +1,13 @@
-<div class="row" *ngIf="movies.length > 0">
+<div *ngIf="!isAuthenticated" style="text-align: center">
+  <p>Please sign-in to access watchlist.</p>
+</div>
+
+<div *ngIf="!isAuthenticated">
+  <app-auth></app-auth>
+</div>
+
+<div *ngIf="isAuthenticated">
+  <div class="row" *ngIf="movies.length > 0">
     <div class="col d-flex justify-content-center justify-content-sm-start" *ngFor="let movie of movies">
       <div class="card border-0 mb-2" style="width: 18rem;">
         <img src="{{movie.imagePath}}" class="card-img-top" alt="{{movie.title}}">
@@ -22,5 +31,8 @@
       </div>
     </div>
   </div>
+</div>
   
-<p *ngIf="movies.length <= 0" style="text-align: center">Your Watchlist is empty</p>  
+<div *ngIf="isAuthenticated">
+  <p *ngIf="movies.length <= 0" style="text-align: center">Your Watchlist is empty</p>  
+</div>

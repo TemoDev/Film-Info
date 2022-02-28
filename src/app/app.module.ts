@@ -13,6 +13,9 @@ import { MovieService } from './shared/movie.service';
 import { RecentlyAddedComponent } from './home/recently-added/recently-added.component';
 import { MovieDetailComponent } from './movies/movie-detail/movie-detail.component';
 import { WatchListComponent } from './watch-list/watch-list.component';
+import {AuthComponent} from './auth/auth.component';
+import { FormsModule } from '@angular/forms';
+import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 
 @NgModule({
   declarations: [
@@ -23,10 +26,13 @@ import { WatchListComponent } from './watch-list/watch-list.component';
     MoviesComponent,
     RecentlyAddedComponent,
     MovieDetailComponent,
-    WatchListComponent
+    WatchListComponent,
+    AuthComponent,
+    LoadingSpinnerComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     SwiperModule,
     HttpClientModule,

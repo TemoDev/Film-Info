@@ -65,9 +65,7 @@ export class MovieDetailComponent implements OnInit {
   }
 
   onAddMovie(movie: Movie) {
-    // const fetchedMovie: Movie = this.movie;
-    // this.movieService.watchListMovie.push(fetchedMovie);
-    this.movieService.createAndStoreMovies(movie);
+    this.movieService.createAndStoreMovies(movie).subscribe(value => console.log(value));
   }
 
 }
