@@ -16,6 +16,7 @@ import { WatchListComponent } from './watch-list/watch-list.component';
 import {AuthComponent} from './auth/auth.component';
 import { FormsModule } from '@angular/forms';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
+import { WatchListContentComponent } from './watch-list/watch-list-content/watch-list-content.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinne
     MovieDetailComponent,
     WatchListComponent,
     AuthComponent,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    WatchListContentComponent
   ],
   imports: [
     BrowserModule,

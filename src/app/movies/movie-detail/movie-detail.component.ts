@@ -19,7 +19,7 @@ import {
 import {
   MovieCast
 } from '../../shared/cast.model';
-import { HttpClient } from '@angular/common/http';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-movie-detail',
@@ -27,6 +27,8 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./movie-detail.component.scss']
 })
 export class MovieDetailComponent implements OnInit {
+
+  isAuthenticated: boolean = false;
 
   subscription: Subscription;
   movies: Movie[] = [];
@@ -38,9 +40,15 @@ export class MovieDetailComponent implements OnInit {
   movieGenres: string[] = [];
 
 
-  constructor(private movieService: MovieService, private route: ActivatedRoute, private http: HttpClient) {}
+  constructor(private movieService: MovieService, private route: ActivatedRoute, private authService: AuthService) {}
 
   ngOnInit() {
+
+    this.authService.user.subscribe(user => {
+      this.isAuthenticated = !!user;
+      // console.log(this.isAuthenticated);
+    })
+
     this.route.params
       .subscribe((params: Params) => {
         return this.movieId = params['id'];
@@ -51,7 +59,7 @@ export class MovieDetailComponent implements OnInit {
 
       // Filter Movie by its ID
       this.movie = this.movies.filter(movie => movie.id == this.movieId)[0];
-      console.log(this.movie.genres);
+      // console.log(this.movie.genres);
 
       this.movie.genres.forEach(value => {
         this.movieGenres.push(this.movieService.getGenre(value));

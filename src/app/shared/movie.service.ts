@@ -30,7 +30,7 @@ export class MovieService {
     return this.http.get('https://api.themoviedb.org/3/movie/popular?api_key=0e40baa3cc7b3ab4defbfaa75a5bd98d&language=en-US&page=1').pipe(
       map((responseData) => {
         const responseMovie = responseData['results'];
-        console.log(responseMovie)
+        // console.log(responseMovie);
         const movies: Movie[] = [];
         for (const movie of responseMovie) {
           movies.push(
@@ -128,32 +128,6 @@ export class MovieService {
 
   }
 
-  private getUsers() {
-    return this.authService.user.pipe(
-      take(1),
-      exhaustMap((user) => {
-        return this.http.get < {
-          [key: string]: Movie
-        } > (
-          'https://film-info-78379-default-rtdb.firebaseio.com/users.json', {
-            params: new HttpParams().set('auth', user.token)
-          }
-        )
-      }), map(responseData => {
-        const usersArr =  [];
-
-        for (const key in responseData) {
-          if (responseData.hasOwnProperty(key)) {
-            usersArr.push({
-              ...responseData[key],
-              keyId: key
-            });
-          }
-        }
-        return usersArr;
-      }))
-  }
-
   fetchMovies() {
 
     return this.authService.user.pipe(
@@ -182,7 +156,31 @@ export class MovieService {
   }
 
   deleteMovie(movieId: string) {
-    return this.http.delete(`https://film-info-78379-default-rtdb.firebaseio.com/movie/${movieId}.json`);
+    // return this.http.delete(`https://film-info-78379-default-rtdb.firebaseio.com/movie/${movieId}.json`);
+
+    return this.authService.user.pipe(
+      take(1),
+      exhaustMap((user) => {
+        return this.http.delete < {
+          [key: string]: Movie
+        } > (
+          'https://film-info-78379-default-rtdb.firebaseio.com/users/'+ this.authService.userKeyId +'/movies/' + movieId +'.json', {
+            params: new HttpParams().set('auth', user.token)
+          }
+        )
+      }), map(responseData => {
+        const movieArray: Movie[] = [];
+
+        for (const key in responseData) {
+          if (responseData.hasOwnProperty(key)) {
+            movieArray.push({
+              ...responseData[key],
+              keyId: key
+            });
+          }
+        }
+        return movieArray;
+      }))
   }
 
 }

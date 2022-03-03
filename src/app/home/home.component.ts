@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
   
     this.movieService.getTMDBMovies().subscribe(movie => {
-      console.log(movie);
+      // console.log(movie);
     })
 
   }
