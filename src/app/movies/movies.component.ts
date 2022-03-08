@@ -13,7 +13,7 @@ export class MoviesComponent implements OnInit, OnDestroy {
 
   subscription: Subscription;
   movies : Movie[];
-
+  
   constructor(private movieService: MovieService) { }
 
   ngOnInit(): void {

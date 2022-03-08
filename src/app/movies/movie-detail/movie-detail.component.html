@@ -1,52 +1,54 @@
-<ng-container *ngIf="movie">
-    <div class="row mt-3">
-        <!-- Movie Thumbnail -->
-        <div class="col-lg-6"><img src="{{movie.imagePath}}" alt="{{movie.title}}" class="img-fluid rounded w-70 d-block"></div>
-        <div class="col-lg-6">
-            <!-- Content -->
-            <h1 class="mt-3 mt-lg-0"> {{movie.title}} </h1>
-            <p class="mt-1 mb-1 fw-light opacity-75">Release Date: {{movie.airDate}}</p>
-    
-            <span class="d-flex">
-                <p class="fw-light me-1">Genres:</p>
-                <p class="fw-light opacity-75 me-1" *ngFor="let genre of movieGenres">{{genre}},</p>
-            </span>
-    
-            <!-- Movie Detail Row -->
-            <div class="row mt-4">
-                <div class="col-4 detail-border">
-                    <p class="fw-thin opacity-75 mb-0">Language</p>
-                    <p class="fw-bolder fs-2 text-secondary">{{movie.language}}</p>
+<div class="container-xxl">
+    <ng-container *ngIf="movie">
+        <div class="row mt-5">
+            <!-- Movie Thumbnail -->
+            <div class="col-lg-6"><img src="{{movie.posterPath}}" alt="{{movie.title}}" class="img-fluid rounded w-70 d-block"></div>
+            <div class="col-lg-6">
+                <!-- Content -->
+                <h1 class="mt-3 mt-lg-0"> {{movie.title}} </h1>
+                <p class="mt-1 mb-1 fw-light opacity-75">Release Date: {{movie.airDate}}</p>
+        
+                <span class="d-flex">
+                    <p class="fw-light me-1">Genres:</p>
+                    <p class="fw-light opacity-75 me-1">{{movie.genres | convertGenres}}</p>
+                </span>
+                
+                <!-- Movie Detail Row -->
+                <div class="row mt-4">
+                    <div class="col-4 detail-border">
+                        <p class="fw-thin opacity-75 mb-0">Language</p>
+                        <p class="fw-bolder fs-2 text-primary">{{movie.language}}</p>
+                    </div>
+                    <div class="col-4 detail-border">
+                        <p class="fw-thin opacity-75 mb-0">Rating</p>
+                        <p class="fw-bolder fs-2 text-primary">{{movie.rating}}/10</p>
+                    </div>
+                    <div class="col-4">
+                        <p class="fw-thin opacity-75 mb-0">Reviews</p>
+                        <p class="fw-bolder fs-2 text-primary">{{movie.reviews}}</p>
+                    </div>
                 </div>
-                <div class="col-4 detail-border">
-                    <p class="fw-thin opacity-75 mb-0">Rating</p>
-                    <p class="fw-bolder fs-2 text-secondary">{{movie.rating}}/10</p>
-                </div>
-                <div class="col-4">
-                    <p class="fw-thin opacity-75 mb-0">Reviews</p>
-                    <p class="fw-bolder fs-2 text-secondary">{{movie.reviews}}</p>
-                </div>
+        
+                <!-- About Section -->
+                <h2 class="fw-medium mt-3">About movie</h2>
+                <p class="fw-light opacity-75">{{movie.description}}</p>
+        
+                <!-- Add to watch list button -->
+                <div *ngIf="!isAuthenticated">Authenticate to access Watchlist</div>
+                <button class="btn btn-primary mt-1" (click)="onAddMovie(movie)" [disabled]="!isAuthenticated">Add to Watchlist</button>
+                
             </div>
-    
-            <!-- About Section -->
-            <h2 class="fw-medium mt-3">About movie</h2>
-            <p class="fw-light opacity-75">{{movie.description}}</p>
-    
-            <!-- Add to watch list button -->
-            <div *ngIf="!isAuthenticated">Authenticate to access Watchlist</div>
-            <button class="btn btn-primary mt-1" (click)="onAddMovie(movie)" [disabled]="!isAuthenticated">Add to Watchlist</button>
-    
         </div>
-    </div>
+        
+    </ng-container>
+    <!-- cast -->
     
-</ng-container>
-<!-- cast -->
-
-<h2 class="fw-medium mt-3 mb-2">Cast</h2>
-
-<div class="d-flex">
-    <div *ngFor="let cast of cast" class="me-3">
-        <img src="{{ cast.imagePath }}" alt="{{ cast.name }}" style="width: 150px">
-        <p>{{ cast.name }}</p>
+    <h2 class="fw-medium mt-3 mb-2">Cast</h2>
+    
+    <div class="d-flex">
+        <div *ngFor="let cast of cast" class="me-3">
+            <img src="{{ cast.imagePath }}" alt="{{ cast.name }}" style="width: 150px">
+            <p>{{ cast.name }}</p>
+        </div>
     </div>
 </div>

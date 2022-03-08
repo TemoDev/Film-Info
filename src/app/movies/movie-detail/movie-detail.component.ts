@@ -59,11 +59,6 @@ export class MovieDetailComponent implements OnInit {
 
       // Filter Movie by its ID
       this.movie = this.movies.filter(movie => movie.id == this.movieId)[0];
-      // console.log(this.movie.genres);
-
-      this.movie.genres.forEach(value => {
-        this.movieGenres.push(this.movieService.getGenre(value));
-      })
 
     })
   }

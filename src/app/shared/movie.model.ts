@@ -10,7 +10,8 @@ export class Movie {
         public airDate: string, 
         public language: string, 
         public reviews: number, 
-        public imagePath: string, 
+        public posterPath: string, 
+        public backdropPath: string, 
         public keyId ?: string,
         public cast ?: MovieCast[]){}
 }

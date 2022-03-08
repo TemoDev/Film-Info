@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit, Inject, ViewChild, ElementRef } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import { AuthService } from '../auth/auth.service';
 import { Router} from '@angular/router';
 
@@ -9,9 +10,11 @@ import { Router} from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
+  @ViewChild('navbarCollapse') nav : ElementRef;
+
   isAuthenticated = false;
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router, @Inject(DOCUMENT) private document: Document) { }
 
   ngOnInit(): void {
 
@@ -23,6 +26,21 @@ export class HeaderComponent implements OnInit {
   logout() {
     this.authService.logout();
     this.router.navigate(['/watch-list']);
+  }
+
+  toggleNav() {
+    this.nav.nativeElement.classList.toggle('show');
+  }
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    if (document.body.scrollTop > 20 ||     
+    document.documentElement.scrollTop > 25) {
+      document.querySelector('.navbar').classList.add('bg-dark');
+    } else{
+      document.querySelector('.navbar').classList.remove('bg-dark');
+
+    }
   }
 
 }

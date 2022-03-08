@@ -17,6 +17,8 @@ import {AuthComponent} from './auth/auth.component';
 import { FormsModule } from '@angular/forms';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 import { WatchListContentComponent } from './watch-list/watch-list-content/watch-list-content.component';
+import { CustomShortenPipe } from './home/carousel/custom-shorten.pipe';
+import { ConvertGenresPipe } from './shared/convertGenres.pipe';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { WatchListContentComponent } from './watch-list/watch-list-content/watch
     WatchListComponent,
     AuthComponent,
     LoadingSpinnerComponent,
-    WatchListContentComponent
+    WatchListContentComponent,
+    CustomShortenPipe,
+    ConvertGenresPipe
   ],
   imports: [
     BrowserModule,

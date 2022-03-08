@@ -1,48 +1,66 @@
-<div style="text-align: center;" *ngIf="isLoading">
+<div class="container-xxl vh-100">
+  <div style="text-align: center;"
+       *ngIf="isLoading">
     <app-loading-spinner></app-loading-spinner>
-</div>
-
-<div class="row justify-content-center">
-  <div class="col-sm-6">
-
-    <div class="alert alert-danger" *ngIf="error">
-        <p>{{ error }}</p>
-    </div>
-
-    <form (ngSubmit)="onFormSubmit()"
-          #form="ngForm"
-          *ngIf="!isLoading">
-      <div class="form-floating mb-3 mt-3">
-        <input type="text"
-               class="form-control"
-               id="email"
-               placeholder="Enter email"
-               name="email"
-               ngModel
-               requred
-               email
-               #email="ngModel">
-        <label for="email">Email</label>
-        <span class="help-block opacity-75 fw-light fs-6" *ngIf="email.touched && email.invalid">Please enter a valid email!</span>
-      </div>
-      <div class="form-floating mt-3 mb-3">
-        <input type="password"
-               class="form-control"
-               id="pwd"
-               placeholder="Enter password"
-               name="pswd"
-               ngModel
-               required
-               minlength="6"
-               #pswd="ngModel">
-        <label for="pwd">Password</label>
-        <span class="help-block opacity-75 fw-light fs-6" *ngIf="pswd.touched && pswd.invalid">Password must contain minimum 6 charachters!</span>
-
-      </div>
-      <button type="submit"
-              class="btn btn-primary me-1"
-              [disabled]="!form.valid">{{ loginMode ? 'Login' : 'Sign Up' }}</button>
-      <button type="button" class="btn btn-primary" (click)="switchAuthMode()">Switch to {{ !loginMode ? 'Login' : 'Sign Up' }}</button>
-    </form>
   </div>
+
+  <div class="row justify-content-center align-items-center h-100">
+    <div class="col-sm-6">
+
+      <div class="alert alert-danger"
+           *ngIf="error">
+        <p>{{ error }}</p>
+      </div>
+
+      <form (ngSubmit)="onFormSubmit()"
+            #form="ngForm"
+            *ngIf="!isLoading"
+            class="rounded-3 px-2 py-4 mx-auto" style="max-width: 28rem;">
+
+            <h3 class="fw-normal mb-3" style="letter-spacing: 1px;">{{ loginMode ? 'Log in' : 'Sign Up' }}</h3>
+
+        <div class="form-floating mb-3 mt-3">
+          <input type="text"
+                 class="form-control"
+                 id="email"
+                 placeholder="Enter email"
+                 name="email"
+                 ngModel
+                 requred
+                 email
+                 #email="ngModel">
+          <label for="email">Email</label>
+          <span class="help-block opacity-75 fw-light fs-6"
+                *ngIf="email.touched && email.invalid">Please enter a valid email!</span>
+        </div>
+        <div class="form-floating mt-3 mb-3">
+          <input type="password"
+                 class="form-control"
+                 id="pwd"
+                 placeholder="Enter password"
+                 name="pswd"
+                 ngModel
+                 required
+                 minlength="6"
+                 #pswd="ngModel">
+          <label for="pwd">Password</label>
+          <span class="help-block opacity-75 fw-light fs-6"
+                *ngIf="pswd.touched && pswd.invalid">Password must contain minimum 6 charachters!</span>
+
+        </div>
+        <div class="d-grid gap-2">
+            <button type="submit"
+            class="btn btn-primary me-1"
+            [disabled]="!form.valid">{{ loginMode ? 'Login' : 'Sign Up' }}</button>
+        </div>
+
+        <p class="fw-light mt-4">Already have an account? 
+          <a (click)="switchAuthMode()" class="text-primary"style="cursor: pointer">
+            {{ !loginMode ? 'Log in' : 'Sign Up' }}
+          </a>
+        </p>
+      </form>
+    </div>
+  </div>
+
 </div>

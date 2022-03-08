@@ -29,6 +29,7 @@ export class MovieService {
   getTMDBMovies() {
     return this.http.get('https://api.themoviedb.org/3/movie/popular?api_key=0e40baa3cc7b3ab4defbfaa75a5bd98d&language=en-US&page=1').pipe(
       map((responseData) => {
+        // console.log(responseData);
         const responseMovie = responseData['results'];
         // console.log(responseMovie);
         const movies: Movie[] = [];
@@ -43,7 +44,9 @@ export class MovieService {
               movie.release_date,
               movie.original_language,
               movie.vote_count,
-              `https://image.tmdb.org/t/p/original` + movie.backdrop_path))
+              `https://image.tmdb.org/t/p/w500` + movie.poster_path,
+              `https://image.tmdb.org/t/p/original` + movie.backdrop_path,
+              ))
         }
         return movies;
       }));

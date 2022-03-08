@@ -1,24 +1,58 @@
-<swiper [config]="swiperConfig">
-  <ng-template swiperSlide *ngFor="let movie of movies">
-    <!-- Bootstrap Card -->
-    <a [routerLink]="['/movies', movie.id]">
-      <div class="card bg-dark text-white">
-        <img src="{{movie.imagePath}}" class="card-img img-fluid" alt="{{ movie.title }}" style="height:600px;">
-        <div class="card-img-overlay d-flex align-items-start flex-column pb-4 ps-2 ps-sm-4"
-          style="background-color: rgba(56, 58, 89, 0.7)">
-          <h1 class="card-title mt-auto fw-normal">{{ movie.title }}</h1>
-          <p class="card-text fs-5 fw-light">
-            <svg width="30" height="30" viewBox="0 0 35 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M16.0001 23.0267L24.2401 28.0001L22.0534 18.6267L29.3334 12.3201L19.7467 11.5067L16.0001 2.66675L12.2534 11.5067L2.66675 12.3201L9.94675 18.6267L7.76008 28.0001L16.0001 23.0267Z"
-                fill="#FFD912" />
-            </svg>
-  
-            {{ movie.rating }} / 10
-          </p>
+<div *ngIf="isLoading" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+  <app-loading-spinner></app-loading-spinner>
+</div>
+
+<div *ngIf="!isLoading">
+  <swiper [config]="swiperConfig"
+          class="homePage-carousel vh-100"
+          style="background-color: #000;">
+    <ng-template swiperSlide
+                 *ngFor="let movie of movies"
+                 class="vh-100">
+
+      <div class="card bg-transparent text-white rounded-0">
+        <img src="{{movie.backdropPath}}"
+             class="rounded-0 opacity-25 w-100 vh-100"
+             alt="{{movie.title}}"
+             style="filter: grayscale(100%); object-fit: cover;">
+        <div class="card-img-overlay d-flex align-items-end align-items-md-center vh-100 p-0">
+          <div class="container-xxl">
+            <div class="card bg-transparent border-0">
+              <div class="row">
+                <div class="col-md-4 d-flex justify-content-center align-items-center">
+                  <img src="{{movie.posterPath}}"
+                       class="d-md-block d-none" style="max-width: 21rem; width: 100%; height: auto;"
+                       alt="{{movie.title}}">
+                </div>
+                <div class="col-md-8 d-flex">
+                  <div class="card-body p-0 p-lg-2 mb-md-0 mb-5">
+                    <h5 class="card-title fs-2">{{ movie.title }}</h5>
+                    <p class="card-text">{{movie.description | customShorten}}</p>
+                    <p class="card-text fs-5 fw-light mt-2 mb-4">
+                      <svg width="30"
+                           height="30"
+                           viewBox="0 0 35 40"
+                           fill="none"
+                           xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16.0001 23.0267L24.2401 28.0001L22.0534 18.6267L29.3334 12.3201L19.7467 11.5067L16.0001 2.66675L12.2534 11.5067L2.66675 12.3201L9.94675 18.6267L7.76008 28.0001L16.0001 23.0267Z"
+                              fill="#FFD912" />
+                      </svg>
+                      {{ movie.rating }} / 10
+                    </p>
+                    <button class="btn btn-primary px-3 py-1 rounded-0"
+                            (click)="navigateToMovie(movie.id)">
+                      Learn More
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        </div>  
-    </a>
-    
-  </ng-template>
-</swiper>
+      </div>
+
+
+    </ng-template>
+  </swiper>
+
+</div>

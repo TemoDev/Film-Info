@@ -10,12 +10,12 @@
 $font-family-sans-serif: 'Montserrat';
 
 // Colors
-$primary: #0077C0;
-$secondary: #C7EEFF;
-$body-bg: #1D242B;
-$body-color: #FAFAFA;
-$text-light: #FAFAFA;
-$dark: #181E24;
+$primary: #FFD700;
+$secondary: #022C43;
+$body-bg: #011824;
+$body-color: #F0F0F0;
+$text-light: #F0F0F0;
+$dark: #011824;
 $font-weight-bolder: 500;
 $border-radius: 20px;
 $spacer: 2rem;
@@ -24,20 +24,26 @@ $spacer: 2rem;
 @import "../node_modules/bootstrap/scss/bootstrap.scss";
 
 // Custom Swiper pagination bullets
+.swiper-pagination{
+  margin-bottom: 24px;
+}
+
 .swiper-pagination-bullet {
-    width: 10px;
-    height: 10px;
+    width: 18px;
+    height: 3px;
+    border-radius: 0;
     text-align: center;
     font-size: 10px;
     color: transparent;
-    opacity: 0.8;
-    background: transparent;
-    border: 1px solid $body-color;
+    opacity: 0.7;
+    background: $body-color;
 
     transition: all 0.3s ease-in-out;
   }
   
   .swiper-pagination-bullet-active {
+    opacity: 1;
+    width: 30px;
     color: #fff;
     background: $primary;
     border: 1px solid $primary;
@@ -45,6 +51,4 @@ $spacer: 2rem;
 
   .swiper-slide{
       height: 30%;
-      padding-left: 5px;
-      padding-right: 5px;
   }

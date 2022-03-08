@@ -1,36 +1,51 @@
-<div *ngIf="isAuthenticated">
-  <div class="row"
-       *ngIf="movies && movies.length > 0">
-    <div class="col d-flex justify-content-center justify-content-sm-start"
-         *ngFor="let movie of movies">
-      <div class="card border-0 mb-2"
-           style="width: 18rem;">
-        <img src="{{movie.imagePath}}"
-             class="card-img-top"
-             alt="{{movie.title}}">
-        <div class="card-body bg-dark d-flex flex-column rounded-bottom">
-          <h5 class="card-title">{{movie.title}}</h5>
-          <p class="card-text">
-            <svg width="22"
-                 height="22"
-                 viewBox="0 0 35 40"
-                 fill="none"
-                 xmlns="http://www.w3.org/2000/svg">
-              <path d="M16.0001 23.0267L24.2401 28.0001L22.0534 18.6267L29.3334 12.3201L19.7467 11.5067L16.0001 2.66675L12.2534 11.5067L2.66675 12.3201L9.94675 18.6267L7.76008 28.0001L16.0001 23.0267Z"
-                    fill="#FFD912" />
-            </svg>
+<div class="container-xxl mt-5" *ngIf="isAuthenticated">
 
-            {{ movie.rating }} / 10
-          </p>
-          <p>{{movie.airDate}} ‧ {{movie.genre}} ‧ 120min</p>
-          <div class="card-body d-flex justify-content-around p-0">
-            <button class="btn btn-danger"
-                    (click)="removeMovie(movie)">Remove</button>
-            <a [routerLink]="['/movies', movie.id]"
-               class="btn btn-primary mt-auto w-50 align-self-end">More</a>
-          </div>
+  <div *ngIf="movies && movies.length > 0" class="d-flex justify-content-center flex-md-row flex-column flex-wrap align-items-stretch">
+    <div class="d-flex mx-sm-auto align-items-stretch border-0 mb-md-2 mb-3 me-1"
+         style="max-width: 550px; width: 100%;"
+         *ngFor="let movie of movies">
+      <img src="{{movie.posterPath}}"
+           class="card-img"
+           style="height: auto; max-width: 170px; width: 100%; border-radius: 10px;box-shadow:
+           0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+           0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+           0 12.5px 10px rgba(0, 0, 0, 0.06),
+           0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+           0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+           0 100px 80px rgba(0, 0, 0, 0.12)"
+           alt="{{movie.title}}">
+      <div class="card-body bg-dark d-flex flex-column my-2 p-2"
+           style="border-end-end-radius: 10px; border-top-right-radius: 10px; box-shadow:
+            0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+            0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+            0 12.5px 10px rgba(0, 0, 0, 0.06),
+            0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+            0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+            0 100px 80px rgba(0, 0, 0, 0.12)">
+        <h5 class="card-title">{{movie.title}}</h5>
+        <p class="fw-light opacity-75 me-1">{{movie.genres | convertGenres}}</p>
+        <p class="card-text mt-0 mb-0">
+          <svg width="22"
+               height="22"
+               viewBox="0 0 35 40"
+               fill="none"
+               xmlns="http://www.w3.org/2000/svg">
+            <path d="M16.0001 23.0267L24.2401 28.0001L22.0534 18.6267L29.3334 12.3201L19.7467 11.5067L16.0001 2.66675L12.2534 11.5067L2.66675 12.3201L9.94675 18.6267L7.76008 28.0001L16.0001 23.0267Z"
+                  fill="#FFD912" />
+          </svg>
+
+          {{ movie.rating }} / 10
+        </p>
+        <p class="card-text mb-2">{{movie.airDate}}</p>
+        <div class="btn-group">
+          <a [routerLink]="['/movies', movie.id]"
+           class="btn btn-primary d-block mt-auto w-50"
+           style="min-width:75px">More</a>
+        <button class="btn btn-danger"
+                (click)="removeMovie(movie)">Remove</button>
         </div>
       </div>
     </div>
   </div>
 </div>
+

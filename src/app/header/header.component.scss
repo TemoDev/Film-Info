@@ -19,10 +19,20 @@
         left: 50%;
         width: 50%;
         height: 2px;
-        background-color: #0077C0;
+        background-color: #FFD912;
         transform: translateX(-50%);
         border-radius: 20px;
 
         transition: all 0.3s ease-in-out;
+    }
+}
+
+.show{
+    text-align: center;
+}
+
+@media (max-width: 576px){
+    .navbar{
+        background-color: #011824;;
     }
 }
