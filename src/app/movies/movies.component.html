@@ -1,15 +1,19 @@
-<div class="container-xxl mt-5">
-  <div class="col-md-6 d-flex m-auto align-items-center mb-4">
+<div class="container-xxl mt-5 mb-3">
+  <div class="col-md-6 d-flex m-auto align-items-center mb-3">
     <!-- Search Form -->
-    <form class="d-flex flex-fill">
+    <form class="d-flex flex-fill" (ngSubmit)="onSubmit()" #searchForm="ngForm">
       <div class="input-group">
         <input type="text"
                class="form-control border-0  bg-secondary"
                placeholder="Search"
-               aria-label="Username"
-               aria-describedby="basic-addon1">
-        <span class="input-group-text border-0 bg-secondary"
-              id="basic-addon1">
+               aria-label="search"
+               aria-describedby="basic-addon1"
+               name="searchInput"
+               ngModel
+               #searchInput = "ngModel"
+               required
+               >  
+        <button class="btn btn-secondary" type="submit" id="button-addon2" [disabled]="searchInput.invalid">
           <svg xmlns="http://www.w3.org/2000/svg"
                width="16"
                height="16"
@@ -19,10 +23,21 @@
             <path
                   d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
           </svg>
-        </span>
+        </button>
       </div>
     </form>
   </div>
+
+  <!-- Filter Buttons -->
+  <div class="d-flex mb-4 justify-content-center">
+    <button type="button" class="btn filter-btn" (click)="filterQuery('now_playing')">Now Playing</button>
+    <button type="button" class="btn filter-btn" (click)="filterQuery('popular')">Popular</button>
+    <button type="button" class="btn filter-btn" (click)="filterQuery('top_rated')">Top Rated</button>
+    <button type="button" class="btn filter-btn" (click)="filterQuery('upcoming')">Upcoming</button>
+  </div>
+
+  <p *ngIf="movies && movies.length === 0" class="text-center">No results</p>
+
   <div class="d-flex justify-content-center flex-md-row flex-column flex-wrap align-items-stretch">
     <div class="d-flex mx-sm-auto align-items-stretch border-0 mb-md-2 mb-3 me-1"
          style="max-width: 550px; width: 100%;"
@@ -66,4 +81,11 @@
       </div>
     </div>
   </div>
+
+  <div class="d-flex justify-content-center mt-3">
+    <div class="btn-group m-auto" role="group" aria-label="First group" *ngIf="totalPages && totalPages.length > 1">
+      <button type="button" class="btn btn-secondary" *ngFor='let pageNum of totalPages' (click)="loadPage(pageNum)">{{pageNum}}</button>
+    </div>  
+  </div>
+
 </div>

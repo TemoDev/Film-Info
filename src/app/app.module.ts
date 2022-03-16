@@ -10,7 +10,6 @@ import { CarouselComponent } from './home/carousel/carousel.component';
 import { MoviesComponent } from './movies/movies.component';
 import { SwiperModule } from 'swiper/angular';
 import { MovieService } from './shared/movie.service';
-import { RecentlyAddedComponent } from './home/recently-added/recently-added.component';
 import { MovieDetailComponent } from './movies/movie-detail/movie-detail.component';
 import { WatchListComponent } from './watch-list/watch-list.component';
 import {AuthComponent} from './auth/auth.component';
@@ -19,6 +18,10 @@ import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinne
 import { WatchListContentComponent } from './watch-list/watch-list-content/watch-list-content.component';
 import { CustomShortenPipe } from './home/carousel/custom-shorten.pipe';
 import { ConvertGenresPipe } from './shared/convertGenres.pipe';
+import { NowPlayingComponent } from './home/now-playing/now-playing.component'
+import { PopularComponent } from './home/popular/popular.component'
+import { TopRatedComponent } from './home/top-rated/top-rated.component'
+import { UpcomingComponent } from './home/upcoming/upcoming.component'
 
 @NgModule({
   declarations: [
@@ -27,14 +30,17 @@ import { ConvertGenresPipe } from './shared/convertGenres.pipe';
     HomeComponent,
     CarouselComponent,
     MoviesComponent,
-    RecentlyAddedComponent,
     MovieDetailComponent,
     WatchListComponent,
     AuthComponent,
     LoadingSpinnerComponent,
     WatchListContentComponent,
     CustomShortenPipe,
-    ConvertGenresPipe
+    ConvertGenresPipe,
+    NowPlayingComponent,
+    PopularComponent,
+    TopRatedComponent,
+    UpcomingComponent,
   ],
   imports: [
     BrowserModule,

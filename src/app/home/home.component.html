@@ -1,8 +1,14 @@
 <!-- Carousel -->
 <div class="sticky-top vh-100">
-    <app-carousel></app-carousel>
+  <app-carousel></app-carousel>
 </div>
 <!-- Recently added movies component-->
-<div class="content-overlay bg-body vh-100" style="position:relative; z-index: 1025;">
-    <app-recently-added></app-recently-added>
+<div class="content-overlay bg-body vh-100"
+     style="position:relative; z-index: 1025;">
+  <div class="container-xxl">
+    <app-now-playing></app-now-playing>
+    <app-popular></app-popular>
+    <app-top-rated></app-top-rated>
+    <app-upcoming></app-upcoming>
+  </div>
 </div>

@@ -1,3 +1,3 @@
 export class MovieCast{
-    constructor(public name: string, public imagePath: string){}
+    constructor(public name: string, public charName: string, public imagePath: string){}
 }

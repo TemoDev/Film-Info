@@ -30,12 +30,13 @@ export class MovieDetailComponent implements OnInit {
 
   isAuthenticated: boolean = false;
 
-  subscription: Subscription;
+  moviesSub: Subscription;
+  castSub: Subscription;
   movies: Movie[] = [];
+  cast: MovieCast[] = [];
 
   movie: Movie;
   movieId: number;
-  cast: MovieCast[];
 
   movieGenres: string[] = [];
 
@@ -54,17 +55,30 @@ export class MovieDetailComponent implements OnInit {
         return this.movieId = params['id'];
       })
 
-    this.subscription = this.movieService.getTMDBMovies().subscribe((movieArr) => {
-      this.movies = movieArr;
-
-      // Filter Movie by its ID
-      this.movie = this.movies.filter(movie => movie.id == this.movieId)[0];
-
+    this.moviesSub = this.movieService.getMovieById(this.movieId).subscribe((resMovie) => {
+      this.movie = resMovie;
+      this.movie.genres.forEach(value => {
+        this.movieGenres.push(value['name'])
+      })
     })
+
+    this.castSub = this.movieService.getMovieCredits(this.movieId).subscribe(resData => {
+      if(resData.length < 20){
+        for(let amount = 0; amount < resData.length; amount++){
+          this.cast.push(resData[amount]);
+        }
+      } else{
+        for(let amount = 0; amount < 20; amount++){
+          this.cast.push(resData[amount]);
+        }
+      }    
+    })
+
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.moviesSub.unsubscribe();
+    this.castSub.unsubscribe();
   }
 
   onAddMovie(movie: Movie) {

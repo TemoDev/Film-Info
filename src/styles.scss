@@ -3,6 +3,7 @@
 // Swiper style imports
 @import '~swiper/scss';
 @import '~swiper/scss/pagination';
+@import '~swiper/scss/navigation';
 
 // Font
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700&display=swap');
@@ -19,6 +20,10 @@ $dark: #011824;
 $font-weight-bolder: 500;
 $border-radius: 20px;
 $spacer: 2rem;
+
+:root{
+  --swiper-navigation-size: 25px
+}
 
 
 @import "../node_modules/bootstrap/scss/bootstrap.scss";
@@ -51,4 +56,9 @@ $spacer: 2rem;
 
   .swiper-slide{
       height: 30%;
+  }
+
+  .swiper-button-prev, .swiper-button-next{
+    color: $primary;
+    top: 30%;
   }

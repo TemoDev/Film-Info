@@ -1,5 +1,3 @@
-import { MovieCast } from './cast.model';
-
 export class Movie {
     constructor(
         public id: number,
@@ -12,6 +10,5 @@ export class Movie {
         public reviews: number, 
         public posterPath: string, 
         public backdropPath: string, 
-        public keyId ?: string,
-        public cast ?: MovieCast[]){}
+        public keyId ?: string){}
 }

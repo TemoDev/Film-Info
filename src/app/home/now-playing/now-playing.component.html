@@ -1,0 +1,35 @@
+<h2 class="section-title pt-3">Now Playing</h2>
+
+<swiper [slidesPerView]="2"
+        [spaceBetween]="30"
+        [loop]="true"
+        [loopFillGroupWithBlank]="true"
+        [navigation]="true"
+        [breakpoints]="{
+        '640': {
+          slidesPerView: 3,
+          spaceBetween: 10
+        },
+        '768': {
+          slidesPerView: 4,
+          spaceBetween: 40
+        },
+        '1024': {
+          slidesPerView: 6,
+          spaceBetween: 50
+        }
+      }"
+        class="mySwiper">
+  <ng-template swiperSlide
+               *ngFor="let movie of nowPlayingMovies"
+               class="bg-dark text-center">
+    <a [routerLink]="['/movies', movie.id]" class="text-decoration-none">
+        <div class="content-card">
+            <img src="{{ movie.posterPath }}"
+                 alt="{{ movie.title }}"
+                 style="max-width: 9.375rem; width: 100%;">
+            <p class="my-2 pb-2 text-light">{{ movie.title }}</p>
+          </div>
+    </a>
+  </ng-template>
+</swiper>
