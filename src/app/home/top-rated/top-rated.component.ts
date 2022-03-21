@@ -27,8 +27,8 @@ export class TopRatedComponent implements OnInit, OnDestroy {
   constructor(private movieService: MovieService) { }
 
   ngOnInit(): void {
-    this.subscription = this.movieService.getTMDBMovies('top_rated').subscribe(data => {
-      this.topRatedMovies = data;
+    this.subscription = this.movieService.getTMDBMovies('top_rated', 1).subscribe(data => {
+      this.topRatedMovies = data.results;
     });
   }
 

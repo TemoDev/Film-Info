@@ -21,7 +21,8 @@ import { ConvertGenresPipe } from './shared/convertGenres.pipe';
 import { NowPlayingComponent } from './home/now-playing/now-playing.component'
 import { PopularComponent } from './home/popular/popular.component'
 import { TopRatedComponent } from './home/top-rated/top-rated.component'
-import { UpcomingComponent } from './home/upcoming/upcoming.component'
+import { UpcomingComponent } from './home/upcoming/upcoming.component';
+import { FooterComponent } from './footer/footer.component'
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { UpcomingComponent } from './home/upcoming/upcoming.component'
     PopularComponent,
     TopRatedComponent,
     UpcomingComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,

@@ -29,21 +29,21 @@
   </div>
 
   <!-- Filter Buttons -->
-  <div class="d-flex mb-4 justify-content-center">
-    <button type="button" class="btn filter-btn" (click)="filterQuery('now_playing')">Now Playing</button>
-    <button type="button" class="btn filter-btn" (click)="filterQuery('popular')">Popular</button>
-    <button type="button" class="btn filter-btn" (click)="filterQuery('top_rated')">Top Rated</button>
-    <button type="button" class="btn filter-btn" (click)="filterQuery('upcoming')">Upcoming</button>
+  <div class="d-flex justify-content-start justify-content-sm-center m-auto mb-4 overflow-auto ">
+    <button type="button" class="btn filter-btn text-nowrap align" (click)="filterQuery('now_playing')">Now Playing</button>
+    <button type="button" class="btn filter-btn text-nowrap" (click)="filterQuery('popular')">Popular</button>
+    <button type="button" class="btn filter-btn text-nowrap" (click)="filterQuery('top_rated')">Top Rated</button>
+    <button type="button" class="btn filter-btn text-nowrap" (click)="filterQuery('upcoming')">Upcoming</button>
   </div>
 
   <p *ngIf="movies && movies.length === 0" class="text-center">No results</p>
 
   <div class="d-flex justify-content-center flex-md-row flex-column flex-wrap align-items-stretch">
-    <div class="d-flex mx-sm-auto align-items-stretch border-0 mb-md-2 mb-3 me-1"
+    <div class="d-flex flex-sm-row flex-column mx-sm-auto align-items-stretch border-0 mb-md-2 mb-3 me-1"
          style="max-width: 550px; width: 100%;"
          *ngFor="let movie of movies">
       <img src="{{movie.posterPath}}"
-           class="card-img"
+           class="card-img m-auto mb-2 mb-sm-0"
            style="height: auto; max-width: 170px; width: 100%; border-radius: 10px;box-shadow:
            0 2.8px 2.2px rgba(0, 0, 0, 0.034),
            0 6.7px 5.3px rgba(0, 0, 0, 0.048),
@@ -52,16 +52,9 @@
            0 41.8px 33.4px rgba(0, 0, 0, 0.086),
            0 100px 80px rgba(0, 0, 0, 0.12)"
            alt="{{movie.title}}">
-      <div class="card-body bg-secondary d-flex flex-column my-2 p-2"
-           style="border-end-end-radius: 10px; border-top-right-radius: 10px; box-shadow:
-            0 2.8px 2.2px rgba(0, 0, 0, 0.034),
-            0 6.7px 5.3px rgba(0, 0, 0, 0.048),
-            0 12.5px 10px rgba(0, 0, 0, 0.06),
-            0 22.3px 17.9px rgba(0, 0, 0, 0.072),
-            0 41.8px 33.4px rgba(0, 0, 0, 0.086),
-            0 100px 80px rgba(0, 0, 0, 0.12)">
+      <div class="card-body movies-card-body bg-secondary d-flex flex-column my-0 my-sm-2 p-2">
         <h5 class="card-title">{{movie.title}}</h5>
-        <p class="fw-light opacity-75 me-1">{{movie.genres | convertGenres}}</p>
+        <p class="fw-light opacity-75 me-1 text-wrap">{{movie.genres | convertGenres}}</p>
         <p class="card-text mt-0 mb-0">
           <svg width="22"
                height="22"
@@ -82,10 +75,20 @@
     </div>
   </div>
 
-  <div class="d-flex justify-content-center mt-3">
+  <!-- <div class="d-flex justify-content-center mt-3">
     <div class="btn-group m-auto" role="group" aria-label="First group" *ngIf="totalPages && totalPages.length > 1">
       <button type="button" class="btn btn-secondary" *ngFor='let pageNum of totalPages' (click)="loadPage(pageNum)">{{pageNum}}</button>
     </div>  
+  </div> -->
+
+  <div class="d-flex justify-content-center mt-3">
+      <button class="btn btn-secondary" type="button" [disabled]="currentPage == 1 ? true : false" (click)="loadPage(currentPage - 1)">Prev</button>
+      <p class="mx-2 align-self-center mb-0">{{currentPage}} / {{totalPages}}</p>
+      <button class="btn btn-secondary" type="button" [disabled]="currentPage == totalPages ? true : false" (click)="loadPage(currentPage + 1)">Next</button>
+  </div>
+
+  <div class="mt-4">
+    <app-footer></app-footer>
   </div>
 
 </div>

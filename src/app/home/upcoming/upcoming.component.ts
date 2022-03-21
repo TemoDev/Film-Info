@@ -27,8 +27,8 @@ export class UpcomingComponent implements OnInit, OnDestroy {
   constructor(private movieService: MovieService) { }
 
   ngOnInit(): void {
-    this.subscription = this.movieService.getTMDBMovies('upcoming').subscribe(data => {
-      this.upcomingMovies = data;
+    this.subscription = this.movieService.getTMDBMovies('upcoming', 1).subscribe(data => {
+      this.upcomingMovies = data.results;
     });
   }
 

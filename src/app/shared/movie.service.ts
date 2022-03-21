@@ -29,15 +29,18 @@ export class MovieService {
   constructor(private http: HttpClient, private authService: AuthService) {}
   watchListMovie: Movie[] = [];
 
-  getTMDBMovies(type: string) {
-    return this.http.get(`https://api.themoviedb.org/3/movie/${type}?api_key=0e40baa3cc7b3ab4defbfaa75a5bd98d&language=en-US&page=1`).pipe(
+  getTMDBMovies(type: string, pageNum: number) {
+    return this.http.get(`https://api.themoviedb.org/3/movie/${type}?api_key=0e40baa3cc7b3ab4defbfaa75a5bd98d&language=en-US&page=${pageNum}`).pipe(
       map((responseData) => {
         // console.log(responseData);
         const responseMovie = responseData['results'];
         // console.log(responseMovie);
-        const movies: Movie[] = [];
+        const movies= {
+          results : [],
+          total_pages: 0,
+        };
         for (const movie of responseMovie) {
-          movies.push(
+          movies.results.push(
             new Movie(
               movie.id,
               movie.original_title,
@@ -51,6 +54,7 @@ export class MovieService {
               `https://image.tmdb.org/t/p/original` + movie.backdrop_path,
             ),            )
         }
+        movies.total_pages = responseData['total_pages'];
         return movies;
       }));
   }

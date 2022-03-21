@@ -1,13 +1,13 @@
-<div *ngIf="!isAuthenticated">
-  <app-auth></app-auth>
-</div>
-
-<div *ngIf="isAuthenticated">
-  <app-watch-list-content></app-watch-list-content>
-</div>
-
-
+<div class="container-xxl min-vh-100 d-flex flex-column">
+  <div *ngIf="!isAuthenticated">
+    <app-auth></app-auth>
+  </div>
   
-<div *ngIf="isAuthenticated">
-  <p *ngIf="movies && movies.length <= 0" style="text-align: center">Your Watchlist is empty</p>  
+  <div *ngIf="isAuthenticated" class="my-auto py-5">
+    <app-watch-list-content></app-watch-list-content>
+  </div>
+  
+  <div class="mt-auto">
+    <app-footer></app-footer>
+  </div>
 </div>

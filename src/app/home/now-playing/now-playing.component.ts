@@ -29,8 +29,8 @@ export class NowPlayingComponent implements OnInit, OnDestroy {
   constructor(private movieService: MovieService) { }
 
   ngOnInit(): void {
-    this.subscription = this.movieService.getTMDBMovies('now_playing').subscribe(data => {
-      this.nowPlayingMovies = data;
+    this.subscription = this.movieService.getTMDBMovies('now_playing', 1).subscribe(data => {
+      this.nowPlayingMovies = data.results;
     });
   }
 

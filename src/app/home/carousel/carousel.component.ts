@@ -29,11 +29,11 @@ export class CarouselComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     Swiper.use([Pagination, Autoplay]);
     this.isLoading = true;
-    this.subscription = this.movieService.getTMDBMovies('popular').subscribe((movieArr) => {
+    this.subscription = this.movieService.getTMDBMovies('popular', 1).subscribe((movieArr) => {
       this.isLoading = false;
       // Get top 5 the most popular movies
       for(let amount = 0; amount < 5; amount++ ){
-        this.movies.push(movieArr[amount]);
+        this.movies.push(movieArr.results[amount]);
       }
     })
   }

@@ -1,4 +1,6 @@
-<div class="container-xxl mt-5" *ngIf="isAuthenticated">
+<div class="container-xxl" *ngIf="isAuthenticated">
+
+  <p *ngIf="movies && movies.length <= 0" class="text-center">Your Watchlist is empty</p>  
 
   <div *ngIf="movies && movies.length > 0" class="d-flex justify-content-center flex-md-row flex-column flex-wrap align-items-stretch">
     <div class="d-flex mx-sm-auto align-items-stretch border-0 mb-md-2 mb-3 me-1"

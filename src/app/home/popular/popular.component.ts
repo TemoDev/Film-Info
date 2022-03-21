@@ -27,8 +27,8 @@ export class PopularComponent implements OnInit, OnDestroy {
   constructor(private movieService: MovieService) { }
 
   ngOnInit(): void {
-    this.subscription = this.movieService.getTMDBMovies('popular').subscribe(data => {
-      this.popularMovies = data;
+    this.subscription = this.movieService.getTMDBMovies('popular', 1).subscribe(data => {
+      this.popularMovies = data.results;
     });
   }
 
