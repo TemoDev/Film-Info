@@ -1,6 +1,6 @@
 # FilmInfo
 
-Angular based project, which is using [TMDB API]`https://www.themoviedb.org/` for fetching different movie data. Project includes Firebase Authentication and Realtime Database for storing movies in watchlist.
+Angular based project, which is using [TMDB API](https://www.themoviedb.org/) for fetching different movie data. Project includes Firebase Authentication and Realtime Database for storing movies in watchlist.
 
 ## Technologies used
 
